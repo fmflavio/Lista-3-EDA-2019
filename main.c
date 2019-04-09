@@ -244,21 +244,99 @@ void retira_fim_n(char *str, int n){
 }
 
 int Q06(){
-
+    char string[]={'F','l','@','v','1','0','M','F'};
+    int i,a=0,b=0,c=0,d=0,tamanho=strlen(string)-1;
+    if(tamanho>8)//tamanho
+        for(i=0;i<tamanho;i++){
+            if(string[i]>=48 && string[i]<=57)//numero
+                a++;
+            if(string[i]>=65 && string[i]<=90)//maiusculas
+                b++;
+            if(string[i]>=97 && string[i]<=122)//minusculas
+                c++;
+            if((string[i]>=32 && string[i]<=47)||(string[i]>=58 && string[i]<=67)||(string[i]>=91 && string[i]<=96)||(string[i]>=123 && string[i]<=126))//fora letra e numero
+                d++;
+        }
+    if(a>0&&b>0&&c>0&&d>0)
+        printf("\nboa\n");
     return 0;
 }
 
 int Q07(){
-
+    char stringA[]={"ACCTGAACTCCCCCC"};
+    char stringB[]={"ACCTAGGACCCCCC"};
+    int i,j,tamanhoA=strlen(stringA)-1,tamanhoB=strlen(stringB)-1,tamanhoSub=0,contador=0;
+    char stringC[tamanhoA],stringD[tamanhoA];
+    for(i=0;i<tamanhoA;i++){
+        for(j=0;j<tamanhoB;j++){
+            if(stringA[i]==stringB[j]){
+                stringC[i]=stringA[i];
+                if(stringA[i+1]!=stringB[j+1]||stringA[i+1]=='\0'){
+                    if(strlen(stringC)>=strlen(stringD)){
+                        strcpy(stringD,stringC);
+                        stringC[0]='\0';
+                        printf("\n%s\n",stringD);
+                    }
+                }
+                break;
+            }
+        }
+    }
+    printf("\nMaior string: %s\n",stringD);
     return 0;
 }
 
-int Q08(){
+void Q08(){
+    char stringA[]={'F','l','a','v','i','o'};
+    char stringB[]={'l','A','v','i'};
+    if(cic(stringA,stringB))
+        printf("\nUM\n");
+    else
+        printf("\nZERO\n");
+}
 
+int cic(char *str1, char *str2){
+    int i,j,tamanho1=strlen(str1)-1,tamanho2=strlen(str2)-1;
+    char *aux;
+    if(tamanho1<tamanho2)
+        return 0;
+    for(i=0;i<tamanho1;i++)
+        if(str1[i]>=65 && str1[i]<=90)//maiusculas
+                str1[i]=str1[i]+32;
+    for(i=0;i<tamanho2;i++)
+        if(str2[i]>=65 && str2[i]<=90)//maiusculas
+                str2[i]=str2[i]+32;
+    if(strcmp(str1,str2)==0)
+        return 1;
+     for(j=0;j<tamanho2;j++)
+        for(i=0;j<tamanho1;i++)
+            if(str2[j]==str1[i]){
+                aux=&str1[i];
+                if(strncmp(aux,str2,tamanho2)==0)
+                    return 1;
+                break;
+            }
     return 0;
 }
 
 int Q09(){
+    char stringA[]={'F','l','a','v','i','o'};
+    char stringB[]={'F','l','A','v','i','o'};
+    if(igual(stringA,stringB))
+        printf("\nUM\n");
+    else
+        printf("\nZERO\n");
+}
 
+int igual(char *str1, char *str2){
+    int i;
+    for(i=0;i<strlen(str1)-1;i++)
+        if(str1[i]>=65 && str1[i]<=90)//maiusculas
+                str1[i]=str1[i]+32;
+    for(i=0;i<strlen(str2)-1;i++)
+        if(str2[i]>=65 && str2[i]<=90)//maiusculas
+                str2[i]=str2[i]+32;
+    if(strcmp(str1,str2)==0)
+        return 1;
     return 0;
 }
